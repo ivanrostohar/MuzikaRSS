@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_hrvatska_koncerti"
+            android:title="@string/menu_hrvatska_koncerti">
+        </item>
+        <item
+            android:id="@+id/menu_hrvatska_partyi"
+            android:title="@string/menu_hrvatska_partyi">
+        </item>
+        <item
+            android:id="@+id/menu_hrvatska_okolo"
+            android:title="@string/menu_hrvatska_okolo">
+        </item>
+        <item
+            android:id="@+id/menu_hrvatska_izlasci"
+            android:title="@string/menu_hrvatska_izlasci">
+        </item>
+    </group>
+
+</menu>

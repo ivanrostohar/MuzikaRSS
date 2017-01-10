@@ -5,6 +5,20 @@
     <string name="tab_kalendar">Kalendar</string>
     <string name="tab_novosti">Novosti</string>
 
+    <string name="menu_hrvatska_koncerti">Koncerti</string>
+    <string name="menu_hrvatska_partyi">Partyi</string>
+    <string name="menu_hrvatska_okolo">Okolo</string>
+    <string name="menu_hrvatska_izlasci">Izlasci</string>
+
+    <string name="menu_kalendar_hrvatska">Hrvatska</string>
+    <string name="menu_kalendar_inozemstvo">Inozemstvo</string>
+    <string name="menu_kalendar_sve">Sve</string>
+
+    <string name="menu_novosti_aktualno">Aktualno</string>
+    <string name="menu_novosti_scena">Scena</string>
+    <string name="menu_novosti_recenzija">Recenzija</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

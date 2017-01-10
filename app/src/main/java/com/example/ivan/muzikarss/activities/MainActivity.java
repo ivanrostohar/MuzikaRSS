@@ -24,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         //setting up the toolbar with home icon enabled
         toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setCustomToolbar(toolbar, getString(R.string.app_name));
 
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         setupViewPager(viewPager);
@@ -44,5 +46,17 @@ public class MainActivity extends AppCompatActivity {
         tabAdapter.addFragment(new HrvatskaFragment(), getString(R.string.tab_hrvatska));
         tabAdapter.addFragment(new KalendarFragment(), getString(R.string.tab_kalendar));
         viewPager.setAdapter(tabAdapter);
+    }
+
+    /**
+     * Method for setting up the toolbar
+     * @param toolbar toolbar layout that you want to show
+     * @param title toolbar title
+     */
+    public void setCustomToolbar(Toolbar toolbar, String title){
+        AppCompatActivity act = this;
+        act.setSupportActionBar(toolbar);
+        if(toolbar != null)
+            toolbar.setTitle(title);
     }
 }
