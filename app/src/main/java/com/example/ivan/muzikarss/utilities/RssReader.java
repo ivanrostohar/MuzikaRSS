@@ -2,6 +2,7 @@ package com.example.ivan.muzikarss.utilities;
 
 import com.example.ivan.muzikarss.models.NovostiRssItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
@@ -18,7 +19,7 @@ public class RssReader {
         this.rssUrl = rssUrl;
     }
 
-    public List<NovostiRssItem> getItems() throws Exception{
+    public ArrayList<NovostiRssItem> getItems() throws Exception{
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
 

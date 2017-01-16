@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         //setting up the toolbar with home icon enabled
         toolbar = (Toolbar)findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setCustomToolbar(toolbar, getString(R.string.app_name));
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class RssParseHandler extends DefaultHandler{
 
-    private List<NovostiRssItem> novostiRssItems;
+    private ArrayList<NovostiRssItem> novostiRssItems;
     private NovostiRssItem currentNovostiRssItem;
 
     private boolean parsingTitle;
@@ -28,7 +28,7 @@ public class RssParseHandler extends DefaultHandler{
         novostiRssItems = new ArrayList<>();
     }
 
-    public List<NovostiRssItem> getNovostiRssItems(){
+    public ArrayList<NovostiRssItem> getNovostiRssItems(){
         return novostiRssItems;
     }
 
