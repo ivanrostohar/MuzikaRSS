@@ -7,13 +7,12 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ivan on 11.1.2017..
  */
 
-public class RssParseHandler extends DefaultHandler{
+public class NovostiRssParseHandler extends DefaultHandler{
 
     private ArrayList<NovostiRssItem> novostiRssItems;
     private NovostiRssItem currentNovostiRssItem;
@@ -24,7 +23,7 @@ public class RssParseHandler extends DefaultHandler{
     private boolean parsingDate;
     private boolean parsingPicture;
 
-    public RssParseHandler(){
+    public NovostiRssParseHandler(){
         novostiRssItems = new ArrayList<>();
     }
 

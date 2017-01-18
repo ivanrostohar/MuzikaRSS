@@ -1,12 +1,9 @@
 package com.example.ivan.muzikarss.fragments;
 
 
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +18,7 @@ import com.example.ivan.muzikarss.R;
 import com.example.ivan.muzikarss.activities.MainActivity;
 import com.example.ivan.muzikarss.adapters.NovostiAdapter;
 import com.example.ivan.muzikarss.models.NovostiRssItem;
-import com.example.ivan.muzikarss.utilities.RssReader;
+import com.example.ivan.muzikarss.utilities.NovostiRssReader;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -33,11 +30,10 @@ public class NovostiFragment extends Fragment {
 
     private View view;
     private Toolbar toolbar;
-    private RssReader rssReader;
+    private NovostiRssReader novostiRssReader;
     private RecyclerView recyclerView;
     private NovostiAdapter novostiAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private DividerItemDecoration dividerItemDecoration;
     private ArrayList<NovostiRssItem> emptyRSSItemArray;
 
     public NovostiFragment() {
@@ -74,10 +70,12 @@ public class NovostiFragment extends Fragment {
             layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity())
-                    .color(Color.MAGENTA)
+                    .color(R.color.colorDivider)
                     .build());
 
-            setCustomLayout(recyclerView, emptyRSSItemArray, novostiAdapter);
+            ((MainActivity) getActivity()).setCustomLayout(recyclerView, emptyRSSItemArray, "NOVOSTI_ADAPTER", novostiAdapter, null);
+
+//            setCustomLayout(recyclerView, emptyRSSItemArray, novostiAdapter);
 
         }
 
@@ -95,9 +93,8 @@ public class NovostiFragment extends Fragment {
             ArrayList<NovostiRssItem> novostiRssItemArrayList = null;
             try {
                 novostiRssItemArrayList = new ArrayList<>();
-                rssReader = new RssReader(strings[0]);
-                novostiRssItemArrayList = rssReader.getItems();
-                return novostiRssItemArrayList;
+                novostiRssReader = new NovostiRssReader(strings[0]);
+                novostiRssItemArrayList = novostiRssReader.getItems();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -108,7 +105,10 @@ public class NovostiFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArrayList<NovostiRssItem> novostiRssItems) {
-            setCustomLayout(recyclerView, novostiRssItems, novostiAdapter);
+
+            ((MainActivity) getActivity()).setCustomLayout(recyclerView, novostiRssItems, "NOVOSTI_ADAPTER", novostiAdapter, null);
+
+//            setCustomLayout(recyclerView, novostiRssItems, novostiAdapter);
 
         }
     }
@@ -141,12 +141,15 @@ public class NovostiFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_novosti_aktualno:
                 new GetRssDataTask().execute(NOVOSTI_AKTUALNO_URL);
+                toolbar.setTitle(item.getTitle());
                 break;
             case R.id.menu_novosti_recenzija:
                 new GetRssDataTask().execute(NOVOSTI_RECENZIJE_URL);
+                toolbar.setTitle(item.getTitle());
                 break;
             case R.id.menu_novosti_scena:
                 new GetRssDataTask().execute(NOVOSTI_SCENA_URL);
+                toolbar.setTitle(item.getTitle());
                 break;
         }
 

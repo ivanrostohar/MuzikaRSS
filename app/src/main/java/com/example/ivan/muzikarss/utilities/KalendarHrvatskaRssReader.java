@@ -1,32 +1,31 @@
 package com.example.ivan.muzikarss.utilities;
 
-import com.example.ivan.muzikarss.models.NovostiRssItem;
+import com.example.ivan.muzikarss.models.KalendarHrvatskaModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 /**
- * Created by Ivan on 11.1.2017..
+ * Created by Ivan on 18.1.2017..
  */
 
-public class RssReader {
+public class KalendarHrvatskaRssReader {
     private String rssUrl;
 
-    public RssReader(String rssUrl){
+    public KalendarHrvatskaRssReader(String rssUrl){
         this.rssUrl = rssUrl;
     }
 
-    public ArrayList<NovostiRssItem> getItems() throws Exception{
+    public ArrayList<KalendarHrvatskaModel> getItems() throws Exception{
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
 
-        RssParseHandler handler = new RssParseHandler();
+        KalendarHrvatskaRssParseHandler handler = new KalendarHrvatskaRssParseHandler();
 
         saxParser.parse(rssUrl, handler);
 
-        return handler.getNovostiRssItems();
+        return handler.getKHItems();
     }
 }

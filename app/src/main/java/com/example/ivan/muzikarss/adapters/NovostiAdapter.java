@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.ivan.muzikarss.R;
 import com.example.ivan.muzikarss.models.NovostiRssItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -39,7 +40,8 @@ public class NovostiAdapter extends RecyclerView.Adapter<NovostiAdapter.ViewHold
         holder.txt_novosti_title.setText(novostiList.get(position).getTitle().toString());
 //        holder.txt_novosti_description.setText(novostiList.get(position).getDescription().toString());
         holder.txt_novosti_date.setText(novostiList.get(position).getPubDate().toString());
-        Glide.with(context).load(novostiList.get(position).getPicture()).override(500, 500).into(holder.img_novosti);
+//        Glide.with(context).load(novostiList.get(position).getPicture()).override(500, 500).into(holder.img_novosti);
+        Picasso.with(context).load(novostiList.get(position).getPicture()).fit().into(holder.img_novosti);
 
     }
 
