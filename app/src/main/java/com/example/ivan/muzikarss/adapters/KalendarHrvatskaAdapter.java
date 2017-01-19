@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.ivan.muzikarss.R;
 import com.example.ivan.muzikarss.models.KalendarHrvatskaModel;
+import com.example.ivan.muzikarss.models.NovostiRssItem;
 
 import java.util.ArrayList;
 
@@ -18,12 +19,22 @@ import java.util.ArrayList;
 
 public class KalendarHrvatskaAdapter extends RecyclerView.Adapter<KalendarHrvatskaAdapter.ViewHolder> {
 
+    /**
+     * Interface that specifes listeners behaviour. The click will return the object type KalendarHrvatskaModel
+     */
+    public interface OnItemClickListener{
+        void onItemClick(KalendarHrvatskaModel kalendarHrvatskaModel);
+    }
+
+    private OnItemClickListener onItemClickListener;
     private Context context;
     private ArrayList<KalendarHrvatskaModel> khItems;
 
-    public KalendarHrvatskaAdapter(Context context, ArrayList<KalendarHrvatskaModel> khItems) {
+    //Adapter constructor will receive an object that implements OnItemClickListener interface
+    public KalendarHrvatskaAdapter(Context context, ArrayList<KalendarHrvatskaModel> khItems, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.khItems = khItems;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -34,6 +45,9 @@ public class KalendarHrvatskaAdapter extends RecyclerView.Adapter<KalendarHrvats
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+        holder.bind(khItems.get(position), onItemClickListener);
+
         holder.txt_kh_title.setText(khItems.get(position).getTitle());
         holder.txt_kh_event_type.setText(khItems.get(position).getEvent_type());
         holder.txt_kh_event_venue.setText(khItems.get(position).getEvent_venue());
@@ -56,6 +70,19 @@ public class KalendarHrvatskaAdapter extends RecyclerView.Adapter<KalendarHrvats
             txt_kh_event_type = (TextView)itemView.findViewById(R.id.txt_kh_event_type);
             txt_kh_event_venue = (TextView)itemView.findViewById(R.id.txt_kh_event_venue);
             txt_kh_venue_date = (TextView)itemView.findViewById(R.id.txt_kh_event_date);
+        }
+
+        /**
+         * See the definition at
+         * {@link com.example.ivan.muzikarss.adapters.NovostiAdapter.ViewHolder#bind(NovostiRssItem, NovostiAdapter.OnItemClickListener)}
+         */
+        public void bind(final KalendarHrvatskaModel kalendarHrvatskaModel, final OnItemClickListener onItemClickListener){
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClick(kalendarHrvatskaModel);
+                }
+            });
         }
     }
 }

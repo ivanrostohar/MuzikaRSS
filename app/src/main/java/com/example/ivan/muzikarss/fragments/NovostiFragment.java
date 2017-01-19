@@ -1,6 +1,7 @@
 package com.example.ivan.muzikarss.fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -73,9 +74,8 @@ public class NovostiFragment extends Fragment {
                     .color(R.color.colorDivider)
                     .build());
 
-            ((MainActivity) getActivity()).setCustomLayout(recyclerView, emptyRSSItemArray, "NOVOSTI_ADAPTER", novostiAdapter, null);
 
-//            setCustomLayout(recyclerView, emptyRSSItemArray, novostiAdapter);
+            ((MainActivity) getActivity()).setCustomLayout(recyclerView, emptyRSSItemArray, "NOVOSTI_ADAPTER", novostiAdapter, null);
 
         }
 
@@ -86,6 +86,13 @@ public class NovostiFragment extends Fragment {
      * AsyncTask for downloading rss feed base on url that you provide od execute method
      */
     private class GetRssDataTask extends AsyncTask<String, Void, ArrayList<NovostiRssItem>> {
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            pd = ProgressDialog.show(getActivity(), "Please wait", "Loading...", true, true);
+            super.onPreExecute();
+        }
 
         @Override
         protected ArrayList<NovostiRssItem> doInBackground(String... strings) {
@@ -108,24 +115,10 @@ public class NovostiFragment extends Fragment {
 
             ((MainActivity) getActivity()).setCustomLayout(recyclerView, novostiRssItems, "NOVOSTI_ADAPTER", novostiAdapter, null);
 
-//            setCustomLayout(recyclerView, novostiRssItems, novostiAdapter);
+            pd.dismiss();
+
 
         }
-    }
-
-    /**
-     * Method for setting up the adapter to recyclerview. It's used in 2 places in class. First onCreateView with empty arraylist because onPostExecute
-     * otherwise returns null on setup adapter and second time in onPostExecute with new arraylist we populated in doInBackground method
-     *
-     * @param rV             RecyclerView you want to populate
-     * @param arrayList      ArrayList with data you want to show in recyclerView
-     * @param novostiAdapter Custom adapter for binding arrayList in recyclerView
-     */
-    public void setCustomLayout(RecyclerView rV, ArrayList<NovostiRssItem> arrayList, NovostiAdapter novostiAdapter) {
-        novostiAdapter = new NovostiAdapter(getActivity(), arrayList);
-        rV.setAdapter(novostiAdapter);
-        novostiAdapter.notifyDataSetChanged();
-
     }
 
 
