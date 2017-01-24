@@ -24,6 +24,9 @@
     <string name="pd_title">Učitavanje stranice</string>
     <string name="pd_description">Molimo pričekajte da se stranica učita...</string>
 
+    <string name="showcase_view_title">Za učitavanje podataka odaberite jednu opciju iz menija</string>
+    <string name="showcase_view_description">U gornjem desnom kutu odaberite ikonu (3 vertikalne točkice) koja će vam pokazati vertikalni meni gdje možete klikom odabrati jednu opciju za koju će vam se onda učitati podaci</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

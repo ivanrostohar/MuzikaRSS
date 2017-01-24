@@ -1,5 +1,6 @@
 package com.example.ivan.muzikarss.activities;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,9 @@ import com.example.ivan.muzikarss.fragments.NovostiFragment;
 import com.example.ivan.muzikarss.fragments.WebViewFragment;
 import com.example.ivan.muzikarss.models.KalendarHrvatskaModel;
 import com.example.ivan.muzikarss.models.NovostiRssItem;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.ArrayList;
 
@@ -46,6 +50,25 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
 
+        //defined the coordinates for the toolbar options menu icon (3 vertical dots)
+        Target target = new Target() {
+            @Override
+            public Point getPoint() {
+                int actionBarSize = toolbar.getWidth();
+                int x = actionBarSize;
+                int y = toolbar.getHeight() / 2;
+                return new Point(x,y);
+            }
+        };
+
+        //builder for building the transparent instruction layout for using the app
+        new ShowcaseView.Builder(this)
+                .setTarget(target)
+                .setContentTitle(getString(R.string.showcase_view_title))
+                .setContentText(getString(R.string.showcase_view_description))
+                .hideOnTouchOutside()
+                .withHoloShowcase()
+                .build();
 
 
     }
