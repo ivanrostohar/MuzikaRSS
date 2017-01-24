@@ -26,37 +26,31 @@ import java.util.concurrent.ExecutionException;
 public class WebViewFragment extends Fragment {
     private WebView webView;
     private String link;
-    private Toolbar toolbar;
-    MainActivity mainActivity;
-    private TabLayout tabLayout;
 
 
     public WebViewFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.web_view_layout, container, false);
-        link = getArguments().getString("LINK");
 
-//        tabLayout = (TabLayout)getActivity().findViewById(R.id.tabs);
         webView = (WebView)view.findViewById(R.id.web_view);
-
-//        tabLayout.setVisibility(View.GONE);
-
 
         loadUrl(link);
 
         return view;
     }
 
+    /**
+     * Method for loading web site based on provided url
+     * @param url Url of the website to load
+     */
     private void loadUrl(String url){
 
-        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), "Please wait!", "Please wait for the page to load", true);
+        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), getString(R.string.pd_title), getString(R.string.pd_description), true);
         progressDialog.setCancelable(true);
 
 

@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         //setting up the toolbar with home icon enabled
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-
         setCustomToolbar(toolbar, getString(R.string.app_name));
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -45,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+
 
 
     }

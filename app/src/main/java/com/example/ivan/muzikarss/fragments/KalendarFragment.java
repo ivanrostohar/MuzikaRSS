@@ -73,6 +73,7 @@ public class KalendarFragment extends Fragment {
 
         ((MainActivity) getActivity()).setCustomLayout(recyclerView, emptyKHArray, TAG_KALENDAR, null, khAdapter);
 
+
         return view;
     }
 

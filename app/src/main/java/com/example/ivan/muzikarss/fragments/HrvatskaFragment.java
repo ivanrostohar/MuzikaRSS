@@ -73,6 +73,7 @@ public class HrvatskaFragment extends Fragment {
 
         ((MainActivity) getActivity()).setCustomLayout(recyclerView, emptyKHItems, TAG_HRVATSKA, null, khAdapter);
 
+
         return view;
     }
 
@@ -99,6 +100,7 @@ public class HrvatskaFragment extends Fragment {
         protected void onPostExecute(ArrayList<KalendarHrvatskaModel> kalendarHrvatskaModels) {
 
             ((MainActivity) getActivity()).setCustomLayout(recyclerView, kalendarHrvatskaModels, TAG_HRVATSKA, null, khAdapter);
+
 
             super.onPostExecute(kalendarHrvatskaModels);
         }
