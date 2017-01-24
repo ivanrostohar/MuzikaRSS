@@ -1,47 +1,29 @@
-package com.example.ivan.muzikarss.fragments;
-
+package com.example.ivan.muzikarss.activities;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.ivan.muzikarss.R;
-import com.example.ivan.muzikarss.activities.MainActivity;
 
-import java.util.EmptyStackException;
-import java.util.concurrent.ExecutionException;
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class WebViewFragment extends Fragment {
+public class WebShowActivity extends AppCompatActivity {
     private WebView webView;
     private String link;
 
-
-    public WebViewFragment() {
-    }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.web_view_layout, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.web_view_layout);
 
-        webView = (WebView)view.findViewById(R.id.web_view);
+        link = getIntent().getStringExtra("LINK");
+
+        webView = (WebView) findViewById(R.id.web_view);
 
         loadUrl(link);
 
-        return view;
     }
 
     /**
@@ -50,7 +32,7 @@ public class WebViewFragment extends Fragment {
      */
     private void loadUrl(String url){
 
-        final ProgressDialog progressDialog = ProgressDialog.show(getActivity(), getString(R.string.pd_title), getString(R.string.pd_description), true);
+        final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.pd_title), getString(R.string.pd_description), true);
         progressDialog.setCancelable(true);
 
 
@@ -75,5 +57,4 @@ public class WebViewFragment extends Fragment {
 
         webView.loadUrl(link);
     }
-
 }

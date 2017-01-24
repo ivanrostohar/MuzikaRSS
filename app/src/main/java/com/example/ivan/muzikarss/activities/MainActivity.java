@@ -1,15 +1,15 @@
 package com.example.ivan.muzikarss.activities;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.example.ivan.muzikarss.R;
@@ -19,12 +19,10 @@ import com.example.ivan.muzikarss.adapters.TabAdapter;
 import com.example.ivan.muzikarss.fragments.HrvatskaFragment;
 import com.example.ivan.muzikarss.fragments.KalendarFragment;
 import com.example.ivan.muzikarss.fragments.NovostiFragment;
-import com.example.ivan.muzikarss.fragments.WebViewFragment;
 import com.example.ivan.muzikarss.models.KalendarHrvatskaModel;
 import com.example.ivan.muzikarss.models.NovostiRssItem;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.Target;
-import com.github.amlcurran.showcaseview.targets.ViewTarget;
 
 import java.util.ArrayList;
 
@@ -32,11 +30,13 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     public TabLayout tabLayout;
     private ViewPager viewPager;
+    private Target target;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         //setting up the toolbar with home icon enabled
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -51,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         //defined the coordinates for the toolbar options menu icon (3 vertical dots)
-        Target target = new Target() {
+        target = new Target() {
             @Override
             public Point getPoint() {
                 int actionBarSize = toolbar.getWidth();
                 int x = actionBarSize;
                 int y = toolbar.getHeight() / 2;
-                return new Point(x,y);
+                return new Point(x, y);
             }
         };
 
@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 .withHoloShowcase()
                 .build();
 
-
     }
+
 
     /**
      * Method for setting up the viewPager with custom adapter that consists of new fragment and its title
@@ -86,11 +86,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(tabAdapter);
     }
 
-    public void switchFragment(int id, Fragment fragment) {
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(id, fragment).addToBackStack(null).commit();
-    }
 
     /**
      * Method for setting up the toolbar
@@ -122,12 +117,12 @@ public class MainActivity extends AppCompatActivity {
                 novostiAdapter = new NovostiAdapter(getApplicationContext(), arrayList, new NovostiAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(NovostiRssItem novostiRssItem) {
-                        Log.v("TITLE", novostiRssItem.getTitle());
-                        WebViewFragment webViewFragment = new WebViewFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("LINK", novostiRssItem.getLink());
-                        webViewFragment.setArguments(bundle);
-                        switchFragment(R.id.activity_main, webViewFragment);
+
+                        Intent i = new Intent(MainActivity.this, WebShowActivity.class);
+                        i.putExtra("LINK", novostiRssItem.getLink());
+                        startActivity(i);
+
+
                     }
                 });
                 rV.setAdapter(novostiAdapter);
@@ -138,12 +133,10 @@ public class MainActivity extends AppCompatActivity {
                 kalendarHrvatskaAdapter = new KalendarHrvatskaAdapter(getApplicationContext(), arrayList, new KalendarHrvatskaAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(KalendarHrvatskaModel kalendarHrvatskaModel) {
-                        Log.v("TITLE2", kalendarHrvatskaModel.getTitle());
-                        WebViewFragment webViewFragment = new WebViewFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("LINK", kalendarHrvatskaModel.getLink());
-                        webViewFragment.setArguments(bundle);
-                        switchFragment(R.id.activity_main, webViewFragment);
+
+                        Intent i = new Intent(MainActivity.this, WebShowActivity.class);
+                        i.putExtra("LINK", kalendarHrvatskaModel.getLink());
+                        startActivity(i);
                     }
                 });
                 rV.setAdapter(kalendarHrvatskaAdapter);
